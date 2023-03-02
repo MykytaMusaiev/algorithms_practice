@@ -4,33 +4,31 @@
 // The types of values contained within the collection/array are not relevant.
 
 class PaginationHelper {
-    constructor(pages, pageDivider) {
-        this.pages = pages
-        this.pageDivider = pageDivider
+    constructor(collection, pageSize) {
+        this.collection = collection
+        this.pageSize = pageSize
     }
 
     pageCount() {
-        return Math.ceil(this.pages.length / this.pageDivider)
+        return Math.ceil(this.collection.length / this.pageSize)
     }
 
     itemCount() {
-        return this.pages.length;
+        return this.collection.length;
     }
 
     pageItemCount(pageIndex) {
-        let result = this.pages.length - (pageIndex *  this.pageDivider)
-        if(result <=0 || pageIndex < 0) return -1;
-        return (result > this.pageDivider) ? this.pageDivider : result
+        let result = this.collection.length - (pageIndex *  this.pageSize)
+
+        return result <= 0 || pageIndex < 0
+            ? -1
+            : (result > this.pageSize ? this.pageSize : result)
     }
 
     pageIndex(itemIndex) {
-        if (itemIndex < 0 || itemIndex > this.pages.length - 1) {
-            return -1;
-        }
-        return Math.floor(itemIndex / this.pageDivider)
+        return itemIndex < 0 || itemIndex > this.collection.length - 1 ? -1 : Math.floor(itemIndex / this.pageSize)
     }
 }
-
 
 const helper = new PaginationHelper(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'], 4);
 
