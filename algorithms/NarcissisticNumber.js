@@ -1,9 +1,7 @@
 function narcissistic(value) {
     let arr = Array.from(String(value), Number)
 
-    let newArr = Array.from(String(value), Number).map( i=> (i ** arr.length))
-
-    return newArr.reduce((i, j) => i + j) === value;
+    return value === arr.reduce((acc, curr) => acc + curr ** arr.length);
 }
 
 console.log(narcissistic(153))
